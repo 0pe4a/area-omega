@@ -1088,39 +1088,7 @@ function library:LoadTheme(name)
 end
 
 function library:AddSettings()
-	local tab = self:AddTab("Settings", "Configs & UI Settings", "rbxassetid://7816858338")
-	local configs = tab:AddPanel("Configs")
-	local configBox, configDrop, themeDrop
-	configDrop = configs:AddDropdown("Configs", function(selected)
-		if selected ~= "" then
-			configBox:Set(selected)
-		end
-	end, { items = self:GetConfigs() })
-	configBox = configs:AddBox("Config Name")
-	configs:AddButton("Load Config", function()
-		if configBox._status.value ~= "" then
-			self:LoadConfig(configBox._status.value)
-			if themeDrop._status.value ~= "" then
-				self:LoadTheme(themeDrop._status.value)
-			end
-		end
-	end)
-	configs:AddButton("Save Config", function()
-		if configBox._status.value ~= "" then
-			self:SaveConfig(configBox._status.value)
-		end
-		configDrop:UpdateItems(self:GetConfigs())
-	end)
-	configs:AddButton("Delete Config", function()
-		if configBox._status.value ~= "" then
-			self:DeleteConfig(configBox._status.value)
-		end
-		configDrop:UpdateItems(self:GetConfigs())
-	end)
-	configs:AddButton("Refresh List", function()
-		configDrop:UpdateItems(self:GetConfigs())
-	end)
-
+	local tab = self:AddTab("Settings", "UI Settings", "rbxassetid://7816858338")
 	local uiSettings = tab:AddPanel("UI Settings")
 	uiSettings:AddBind("Toggle GUI", function(bindName)
 		self._gui.Enabled = not self._gui.Enabled
