@@ -866,7 +866,6 @@ function library.new(gameName)
 					create("Frame", { Name = "underline", AnchorPoint = Vector2.new(0, 1), BackgroundColor3 = "theme.topBackground", BorderSizePixel = 0, Position = UDim2.new(0, 0, 1, 0), Size = UDim2.new(1, 0, 0, 2) })
 				}, UDim.new(0, 4)),
 				create("TextLabel", { Name = "tab", AnchorPoint =  Vector2.new(0.5, 1), BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0.5, 0, 1, 0), Size = UDim2.new(1, -16, 0, 26), Text = "Home", TextColor3 = "theme.textForeground", TextSize = 12, TextXAlignment = Enum.TextXAlignment.Left }),
-				create("TextLabel", { Name = "site", AnchorPoint =  Vector2.new(0.5, 1), BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0.5, 0, 1, 0), Size = UDim2.new(1, -16, 0, 26), Text = "funny gui lol", TextColor3 = "theme.textForeground", TextSize = 12, TextXAlignment = Enum.TextXAlignment.Right }),
 				create("Folder", { Name = "container" })
 			}, UDim.new(0, 4)),
 			create("Folder", { Name = "notifs" })
