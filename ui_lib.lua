@@ -1135,10 +1135,6 @@ function library:AddSettings()
 		themeDrop:UpdateItems(self:GetThemes())
 	end)
 
-	local credits = tab:AddPanel("Credits")
-	credits:AddClipboardLabel("0pe4a - Owner, Scripter", "Opera#1759")
-	credits:AddClipboardLabel("Kieran - UI lib", "https://projectevo.xyz")
-
 	local misc = tab:AddPanel("Misc")
 	misc:AddToggle("Anti AFK", function(state)
 		self._settings.options.antiAfk = state
