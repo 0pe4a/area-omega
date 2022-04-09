@@ -1089,9 +1089,6 @@ end
 
 function library:AddSettings()
 	local tab = self:AddTab("Settings", "Configs & UI Settings", "rbxassetid://7816858338")
-	configs:AddButton("Refresh List", function()
-		configDrop:UpdateItems(self:GetConfigs())
-	end)
 
 	local uiSettings = tab:AddPanel("UI Settings")
 	uiSettings:AddBind("Toggle GUI", function(bindName)
