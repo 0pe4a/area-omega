@@ -1,2 +1,2 @@
 # area-omega
-fuck you
+cry about it retards
