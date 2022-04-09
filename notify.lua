@@ -1,11 +1,11 @@
 --[============ Create GUI if doesnt exist ============]--
 
-if not game:GetService("CoreGui"):WaitForChild("Notifications") then 
+if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Notifications") then 
   local Notifications = Instance.new("ScreenGui")
   local Notifications_2 = Instance.new("Folder")
 
   Notifications.Name = "Notifications"
-  Notifications.Parent = game:GetService("CoreGui")
+  Notifications.Parent = game:GetService("Players").LocalPlayer.PlayerGui
   Notifications.ZIndexBehavoir = 0
   Notifications.ResetOnSpawn = false
 
@@ -80,7 +80,7 @@ local function organiseNotifs(notifDir)
 end
 
 local function getNotificationGui()
-	return game:GetService("CoreGui"):WaitForChild("Notifications")
+	return game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Notifications")
 end
 
 local library = {}
