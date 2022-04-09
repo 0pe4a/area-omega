@@ -362,7 +362,7 @@ function panel:AddClipboardLabel(name, copyText, options)
 	self._items[#self._items + 1] = clipboardLabel
 	return clipboardLabel
 end
-
+ 
 function panel:AddButton(name, callback)
 	local button = {
 		_class = "Button",
