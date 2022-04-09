@@ -6,7 +6,6 @@ if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Notifica
 
   Notifications.Name = "Notifications"
   Notifications.Parent = game:GetService("Players").LocalPlayer.PlayerGui
-  Notifications.ZIndexBehavoir = 0
   Notifications.ResetOnSpawn = false
 
   Notifications_2.Name = "Notifications"
