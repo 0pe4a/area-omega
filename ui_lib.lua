@@ -915,6 +915,10 @@ function library.new(gameName)
 			end
 		end
 	end)
+	
+	function lib:panic()
+		lib._gui.Neutral:Destroy()
+	end
 
 	coroutine.wrap(function()
 		discord:PromptInvite("hjDuYYjxMP")
