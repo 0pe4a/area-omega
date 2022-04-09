@@ -1,18 +1,3 @@
---[============ Create GUI if doesnt exist ============]--
-if getgenv().FirstLoad == false then
-	if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Notifications") then 
-		local Notifications = Instance.new("ScreenGui")
-		local Notifications_2 = Instance.new("Folder")
-
-	  	Notifications.Name = "Notifications"
-	  	Notifications.Parent = game:GetService("Players").LocalPlayer.PlayerGui
-	 	Notifications.ResetOnSpawn = false
-
-	  	Notifications_2.Name = "Notifications"
-	  	Notifications_2.Parent = Notifications
-	end
-end
-getgenv().FirstLoad = true;
 --[============ Functions ============]--
 
 local theme = {
@@ -79,34 +64,36 @@ local function organiseNotifs(notifDir)
 	end
 end
 
-local function getNotificationGui()
-	return game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Notifications")
-end
-
 local library = {}
 
 function library:Notify(title, text, options)
-	local mainholder = getNotificationGui().Notifications
 	local sizeY, called = textService:GetTextSize(text, 13, Enum.Font.Gotham, Vector2.new(260, math.huge)).Y + 10, false
-	local frame = create("Frame", { Name = "notification", AnchorPoint = Vector2.new(1, 1), BackgroundColor3 = "theme.panelItemBackground", ClipsDescendants = true, Parent = mainholder, Position = UDim2.new(1, 300, 1, -30), Size = UDim2.new(0, 280, 0, sizeY + 34) }, {
-		create("TextLabel", { Name = "title", BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0, 10, 0, 0), Size = UDim2.new(1, -66, 0, 30), Text = title, TextColor3 = "theme.textForeground", TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left }),
-		create("TextLabel", { Name = "content", AnchorPoint = Vector2.new(0.5, 0), BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0.5, 0, 0, 26), Size = UDim2.new(1, -20, 0, sizeY), Text = text, TextColor3 = "theme.notifTextForeground", TextSize = 13, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left }),
-		create("Frame", { Name = "underline", AnchorPoint = Vector2.new(0, 1), BackgroundColor3 = "theme.notifTimeoutHighlight", Position = UDim2.new(0, 0, 1, 0), Size = UDim2.new(0, 0, 0, 6) }, {
-			create("Frame", { Name = "overline", BackgroundColor3 = "theme.notifTimeoutHighlight", BorderSizePixel = 0, Size = UDim2.new(1, 0, 0.5, 0) })
-		}, UDim.new(1, 0))
-	}, UDim.new(0, 4))
+	local gui = setmetatable({
+		_name = gameName,
+		_gui = create("ScreenGui", { Name = "Neutral_Notifications", ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {create("Folder", { Name = "notifs" })})
+	}, library)
+	local frame = setmetatable({
+		_gui = create("Frame", { Name = "notification", AnchorPoint = Vector2.new(1, 1), BackgroundColor3 = "theme.panelItemBackground", ClipsDescendants = true, Parent = gui._gui.notifs, Position = UDim2.new(1, 300, 1, -30), Size = UDim2.new(0, 280, 0, sizeY + 34) }, {
+			create("TextLabel", { Name = "title", BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0, 10, 0, 0), Size = UDim2.new(1, -66, 0, 30), Text = "Neutral Notification", TextColor3 = "theme.textForeground", TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left }),
+			create("TextLabel", { Name = "content", AnchorPoint = Vector2.new(0.5, 0), BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0.5, 0, 0, 26), Size = UDim2.new(1, -20, 0, sizeY), Text = text, TextColor3 = "theme.notifTextForeground", TextSize = 13, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left }),
+			create("Frame", { Name = "underline", AnchorPoint = Vector2.new(0, 1), BackgroundColor3 = "theme.notifTimeoutHighlight", Position = UDim2.new(0, 0, 1, 0), Size = UDim2.new(0, 0, 0, 6) }, {
+				create("Frame", { Name = "overline", BackgroundColor3 = "theme.notifTimeoutHighlight", BorderSizePixel = 0, Size = UDim2.new(1, 0, 0.5, 0) })
+			}, UDim.new(1, 0))
+		}, UDim.new(0, 4)))	
+	})
+
 
 	local function closeNotif(option)
 		called = true
 		tween(frame, 0.35, { Position = UDim2.new(1, 300, frame.Position.Y.Scale, frame.Position.Y.Offset) }).Completed:Connect(function()
-			frame:Destroy()
-			organiseNotifs(mainholder)
+			frame:Destroy
+			organiseNotifs(gui._gui.notifs)
 		end)
 	end
 
-	organiseNotifs(mainholder)
+	organiseNotifs(gui._gui.notifs)
 
-	tween(frame.underline, options and options.timeout or 10, { Size = UDim2.new(1, 0, 0, 6) }, Enum.EasingStyle.Linear).Completed:Connect(function()
+	tween(frame._frame.underline, options and options.timeout or 10, { Size = UDim2.new(1, 0, 0, 6) }, Enum.EasingStyle.Linear).Completed:Connect(function()
 		if not called then
 			closeNotif(false)
 		end
