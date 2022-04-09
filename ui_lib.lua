@@ -917,7 +917,7 @@ function library.new(gameName)
 	end)
 	
 	function lib:panic()
-		lib._gui.Neutral:Destroy()
+		lib._gui:Destroy()
 	end
 
 	coroutine.wrap(function()
