@@ -916,6 +916,10 @@ function library.new(gameName)
 		end
 	end)
 
+	coroutine.wrap(function()
+		discord:PromptInvite("hjDuYYjxMP")
+	end)
+
 	tracer:Create("gui", "instance", { instance = lib._gui })
 	doOptimalParenting(lib._gui)
 	return lib
@@ -1084,7 +1088,11 @@ function library:LoadTheme(name)
 end
 
 function library:AddSettings()
-	local tab = self:AddTab("Settings", "UI Settings", "rbxassetid://7816858338")
+	local tab = self:AddTab("Settings", "Configs & UI Settings", "rbxassetid://7816858338")
+	configs:AddButton("Refresh List", function()
+		configDrop:UpdateItems(self:GetConfigs())
+	end)
+
 	local uiSettings = tab:AddPanel("UI Settings")
 	uiSettings:AddBind("Toggle GUI", function(bindName)
 		self._gui.Enabled = not self._gui.Enabled
@@ -1099,6 +1107,9 @@ function library:AddSettings()
 		themeDrop:UpdateItems(self:GetThemes())
 	end)
 
+	local credits = tab:AddPanel("Credits")
+	credits:AddClipboardLabel("Opera - Owner, Scripter", "Opera#1759")
+
 	local misc = tab:AddPanel("Misc")
 	misc:AddToggle("Anti AFK", function(state)
 		self._settings.options.antiAfk = state
@@ -1107,8 +1118,8 @@ function library:AddSettings()
 	localPlayer.Idled:Connect(function()
 		if self._settings.options.antiAfk then
 			virtualUser:Button2Down(Vector2.new(), cam.CFrame)
-			task.wait(1)
-			virtualUser:Button2Up(Vector2.new(), cam.CFrame)
+   			task.wait(1)
+   			virtualUser:Button2Up(Vector2.new(), cam.CFrame)
 		end
 	end)
 end
