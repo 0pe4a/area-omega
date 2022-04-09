@@ -1,17 +1,18 @@
 --[============ Create GUI if doesnt exist ============]--
+if getgenv().FirstLoad == false then
+	if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Notifications") then 
+		local Notifications = Instance.new("ScreenGui")
+		local Notifications_2 = Instance.new("Folder")
 
-if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Notifications") then 
-  local Notifications = Instance.new("ScreenGui")
-  local Notifications_2 = Instance.new("Folder")
+	  	Notifications.Name = "Notifications"
+	  	Notifications.Parent = game:GetService("Players").LocalPlayer.PlayerGui
+	 	Notifications.ResetOnSpawn = false
 
-  Notifications.Name = "Notifications"
-  Notifications.Parent = game:GetService("Players").LocalPlayer.PlayerGui
-  Notifications.ResetOnSpawn = false
-
-  Notifications_2.Name = "Notifications"
-  Notifications_2.Parent = Notifications
+	  	Notifications_2.Name = "Notifications"
+	  	Notifications_2.Parent = Notifications
+	end
 end
-
+getgenv().FirstLoad = true;
 --[============ Functions ============]--
 
 local theme = {
